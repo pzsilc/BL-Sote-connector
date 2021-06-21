@@ -31,9 +31,8 @@ def run():
     del app
 
 if __name__ == '__main__':
-    #for hour in config['hours']:
-    #    schedule.every().day.at(hour).do(run)
-    #while True:
-    #    schedule.run_pending()
-    #    time.sleep(1)
-    run()
+    for hour in config['hours']:
+        schedule.every().day.at(hour).do(run)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
