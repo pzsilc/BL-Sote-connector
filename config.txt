@@ -1,0 +1,18 @@
+{
+    "baselinker": {
+        "api": "https://api.baselinker.com/connector.php", 
+        "token": "3000-16797-U16ECJQLXP5D3Y9AFJTEZ6AACIV2NURTUQ3BWTREEQ0A6YFY40QLW09CG5NLS5RR"
+    }, 
+    "soteshop": {
+        "api": "https://nails.silcare.com/backend.php/product/soap?wsdl", 
+        "api_login": "https://nails.silcare.com/backend.php/webapi/soap?wsdl", 
+        "username": "patryk.znamirowski@silcare.com", 
+	"password": "patryk.znamirowski"
+    },
+    "hours": [
+        "11:30"
+    ],
+    "logspath": "logs",
+    "logs_interval_days": 1,
+    "set_0_if_less_than": 30
+}
