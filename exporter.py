@@ -40,8 +40,6 @@ class Exporter(Handler):
         pattern = re.compile('{(.*)}')
 
         for product in products:
-            if product.sku != 'Pasta SPHSBL500150-M':
-                continue
             if product.to_skip:
                 continue
             try:
