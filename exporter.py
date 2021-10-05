@@ -40,6 +40,8 @@ class Exporter(Handler):
         pattern = re.compile('{(.*)}')
 
         for product in products:
+            if product.sku != 'Pasta SPHSBL500150-M':
+                continue
             if product.to_skip:
                 continue
             try:
@@ -47,7 +49,8 @@ class Exporter(Handler):
                     '_session_hash': _hash,
                     'code': product.sku
                 })
-            except:
+            except Exception as e:
+                print(str(e) + '-' + str(product.sku))
                 continue
 
             if sote_product['product_options'] and sote_product['product_options']!='{ "typ_ceny": "brutto" }' and sote_product['product_options']!='{ "typ_ceny": "netto" }':
@@ -94,8 +97,8 @@ class Exporter(Handler):
                     updated_increase=True,
                     product=product
                 )
-        for product in products:
-            if not product.was_updated:
-                self.write_logs(Fore.RED + f'Produkt {product.sku} nie został znaleziony')
+        #for product in products:
+        #    if not product.was_updated:
+        #        self.write_logs(Fore.RED + f'Produkt {product.sku} nie został znaleziony')
         self.write_logs(Style.RESET_ALL + 'Koniec' + f'\nZaktualizowano {self.updated} produktów\n\n\n\n')
         return self

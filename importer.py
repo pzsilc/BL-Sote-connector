@@ -6,6 +6,19 @@ import math
 
 
 class Importer(Handler):
+    def find_ignore_and_zero(self, features):
+        ignore, zero = False, None
+        for i in features:
+            if i[0] == 'IGNORUJ':
+                ignore = True
+            if i[0] == 'ZERO':
+                zero = int(i[1])
+        return {
+            'ignore': ignore,
+            'zero': zero
+        }
+
+
     def run(self):
         #get all products
         res = requests.post(self._auth['api'], data={
@@ -38,13 +51,9 @@ class Importer(Handler):
             details = res['products']
             for key in details:
                 obj = details[key]
-                to_skip = True if len(obj['features']) > 0 and obj['features'][0][0] == 'IGNORUJ' else False
-                zero = None
-                if len(obj['features']) == 2 and obj['features'][1][0] == 'ZERO':
-                    try:
-                        zero = int(obj['features'][1][1])
-                    except:
-                        pass
+                features = self.find_ignore_and_zero(obj['features'])
+                to_skip = features['ignore']
+                zero = features['zero']
                 this_product = list(filter(lambda product: product['product_id'] == key, products))[0]
                 this_product['to_skip'] = to_skip
                 this_product['zero'] = zero

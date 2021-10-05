@@ -10,7 +10,7 @@
 	"password": "patryk.znamirowski"
     },
     "hours": [
-        "11:30"
+        "12:26"
     ],
     "logspath": "logs",
     "logs_interval_days": 1,
